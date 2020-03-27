@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Pesebaran Corona </title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
+    <link href="assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="assets/js/loader.js"></script>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="assets/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="assets/css/widgets/modules-widgets.css">
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+<body class="alt-menu sidebar-noneoverflow">
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN NAVBAR  -->
+    <div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm expand-header">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+            <ul class="navbar-item flex-row ml-auto">
+                <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                    </a>
+                    <div class="dropdown-menu position-absolute e-animated e-fadeInUp" aria-labelledby="userProfileDropdown">
+                        <div class="user-profile-section">
+                            <div class="media mx-auto">
+                                <img src="assets/img/royhan.jpeg" class="img-fluid mr-2" alt="avatar">
+                                <div class="media-body">
+                                    <h5>Izzatur Royhan</h5>
+                                    <p>Bukan Developers</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container sidebar-closed sbar-open" id="container">
+
+        <div class="overlay"></div>
+        <div class="cs-overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme">
+
+            <nav id="sidebar">
+
+                <ul class="navbar-nav theme-brand flex-row  text-center">
+                    <li class="nav-item theme-logo">
+                        <a href="index.html">
+                            <img src="assets/img/logo.svg" class="navbar-logo" alt="logo">
+                        </a>
+                    </li>
+                    <li class="nav-item theme-text">
+                        <a href="index.html" class="nav-link"> CORONA </a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled menu-categories" id="accordionExample">
+                    <li class="menu">
+                        <a href="index.html" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                                <span>Beranda</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu active">
+                        <a href="region.html" aria-expanded="true" class="dropdown-toggle">
+                            <div class="">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            <span>Wilayah</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu">
+                      <a href="#" aria-expanded="false" class="dropdown-toggle">
+                           <div class="">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                               <span>Negara</span>
+                           </div>
+                       </a>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+        <!--  END SIDEBAR  -->
+
+        <!--  BEGIN CONTENT AREA  -->
+				<div id="content" class="main-content">
+            <div class="layout-px-spacing">
+                <div class="row layout-top-spacing">
+
+                    <div class="analytics col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-activity-two">
+
+                            <div class="widget-heading">
+                                <h5 class="">Pilih Wialayah</h5>
+                            </div>
+
+                            <div class="widget-content">
+
+                                <div class="mt-container mx-auto">
+                                    <div class="timeline-line">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+										<div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+											<div class="widget-four">
+													<div class="widget-heading">
+															<h5 class="">Data per Wilayah </h5>
+													</div>
+													<div class="widget-content">
+															<div class="vistorsBrowser">
+																	<div class="browser-list">
+																			<div class="w-browser-details">
+																					<div class="w-browser-info">
+																							<h6>Kasus</h6>
+																							<p class="browser-count">0</p>
+																					</div>
+																					<div class="w-browser-stats">
+																							<div class="progress">
+																									<div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="1000" aria-valuemax="0"></div>
+																							</div>
+																					</div>
+																			</div>
+																	</div>
+
+																	<div class="browser-list">
+																			<div class="w-browser-details">
+
+																					<div class="w-browser-info">
+																							<h6>Meninggal</h6>
+																							<p class="browser-count">0</p>
+																					</div>
+
+																					<div class="w-browser-stats">
+																							<div class="progress">
+																									<div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+																							</div>
+																					</div>
+
+																			</div>
+
+																	</div>
+
+																	<div class="browser-list">
+																			<div class="w-browser-details">
+
+																					<div class="w-browser-info">
+																							<h6>Sembuh</h6>
+																							<p class="browser-count">0</p>
+																					</div>
+
+																					<div class="w-browser-stats">
+																							<div class="progress">
+																									<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 10%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+																							</div>
+																					</div>
+
+																			</div>
+
+																	</div>
+
+															</div>
+
+													</div>
+											</div>
+									</div>
+
+                </div>
+            </div>
+        </div>
+        <!--  END CONTENT AREA  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="assets/bootstrap/js/popper.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/timezone.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="assets/plugins/apex/apexcharts.min.js"></script>
+
+    <script>
+    const timazone = document.querySelector('#timezone');
+		const timeline = document.querySelector('.timeline-line');
+		const regionProgress = document.querySelector('.vistorsBrowser');
+
+    async function regions() {
+
+      const getData = await fetch('https://api.kawalcorona.com/indonesia/provinsi/')
+      .then(res => res.json())
+      .then(res => res);
+
+			let line = ``;
+			getData.map((r,i) =>{
+				line += `<div class="region item-timeline" data-index=${i}>
+						<div class="t-dot" data-original-title="" title="">
+						</div>
+						<div class="t-text">
+								<p>${r.attributes.Provinsi}</p>
+						</div>
+				</div>`
+			});
+			timeline.innerHTML = line
+
+			const region = document.querySelectorAll('.region');
+			let progress = ``;
+			region.forEach((r, i) => {
+				r.addEventListener('click', function(){
+						this.classList.add('timeline-new');
+						[...region].find(f => {
+							if(f.dataset.index !== this.dataset.index){
+								f.classList.remove('timeline-new');
+							}
+						})
+						const showProgress = displayProgress(getData[i])
+						regionProgress.innerHTML = showProgress
+				})
+			})
+			// const chases = getData.map(r => r.attributes.Kasus_Posi);
+			// const death = getData.map(r => r.attributes.Kasus_Meni);
+			// const recover = getData.map(r => r.attributes.Kasus_Semb);
+
+			function displayProgress(data){
+				return `<div class="browser-list">
+						<div class="w-browser-details">
+								<div class="w-browser-info">
+										<h6>Kasus</h6>
+										<p class="browser-count">${data.attributes.Kasus_Posi}</p>
+								</div>
+								<div class="w-browser-stats">
+										<div class="progress">
+												<div class="progress-bar bg-gradient-primary" role="progressbar" style="width: ${data.attributes.Kasus_Posi}%" aria-valuenow="0" aria-valuemin="1000" aria-valuemax="0"></div>
+										</div>
+								</div>
+						</div>
+				</div>
+
+				<div class="browser-list">
+						<div class="w-browser-details">
+
+								<div class="w-browser-info">
+										<h6>Meninggal</h6>
+										<p class="browser-count">${data.attributes.Kasus_Meni}</p>
+								</div>
+
+								<div class="w-browser-stats">
+										<div class="progress">
+												<div class="progress-bar bg-gradient-danger" role="progressbar" style="width: ${data.attributes.Kasus_Meni}%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000"></div>
+										</div>
+								</div>
+
+						</div>
+
+				</div>
+
+				<div class="browser-list">
+						<div class="w-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+						</div>
+						<div class="w-browser-details">
+
+								<div class="w-browser-info">
+										<h6>Others</h6>
+										<p class="browser-count">15%</p>
+								</div>
+
+								<div class="w-browser-stats">
+										<div class="progress">
+												<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+								</div>
+
+						</div>
+
+				</div>`
+			}
+    }
+    regions();
+    </script>
+
+
+
+</body>
+</html>

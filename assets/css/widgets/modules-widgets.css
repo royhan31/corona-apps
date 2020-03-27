@@ -230,9 +230,9 @@
     padding: 5px;
     margin-right: 11px;
     display: flex;
-    height: 37px;
+    height: 18px;
     justify-content: center;
-    width: 36px;
+    width: 18px;
 }
 .widget.widget-activity-three .timeline-line .item-timeline .t-dot div.t-primary {
     background-color: #1b55e2;
@@ -758,7 +758,7 @@
     border: 2px solid #3b3f5c;
 }
 .widget-card-two .card-bottom-section .img-group img:not(:last-child) {
-    margin-right: 5px;    
+    margin-right: 5px;
 }
 .widget-card-two .card-bottom-section a {
     display: block;
@@ -873,7 +873,7 @@
 @media (max-width: 1199px) {
     .widget.widget-activity-two .widget-heading {
         margin-bottom: 21px;
-    }    
+    }
     .widget-activity-two .mt-container {
         position: relative;
         height: 177px;
@@ -1345,7 +1345,7 @@
     height: 8px;
     top: 5px;
     left: 5px;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     border-color: #e0e6ed;
     background: #bfc9d4;
     z-index: 1;
@@ -1445,7 +1445,7 @@
     min-width: 80px;
     max-width: 80px;
     font-size: 13px;
-    font-weight: 600; 
+    font-weight: 600;
     color: #acb0c3;
     letter-spacing: 1px;
 }
@@ -1570,7 +1570,7 @@
     min-width: 80px;
     max-width: 80px;
     font-size: 13px;
-    font-weight: 600; 
+    font-weight: 600;
     color: #acb0c3;
     padding: 10px 0;
     letter-spacing: 1px;
@@ -1821,7 +1821,7 @@
     margin-left: 10px;
 }
 .widget-table-three .table > thead > tr > th:last-child .th-content {
-    text-align: right; 
+    text-align: right;
     margin-right: 10px;
 }
 .widget-table-three .table > thead > tr > th {

@@ -90,7 +90,7 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="#" aria-expanded="false" class="dropdown-toggle">
+                        <a href="region.html" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                             <span>Wilayah</span>
@@ -222,17 +222,36 @@
                             </div>
                         </div>
 
-                   <!-- <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                        <div class="widget widget-chart-two">
                            <div class="widget-heading">
-                               <h5 class="">indonesia <span ></span> </h5>
+                               <h5 class="">Persentase<span ></span> </h5>
                            </div>
                            <div class="widget-content">
-                               <div id="chart-2" class=""></div>
+                               <div id="donut-chart" class=""></div>
                            </div>
                        </div>
-                   </div> -->
+                   </div>
 
+                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                       <div class="widget widget-activity-three">
+
+                           <div class="widget-heading">
+                               <h5 class="">Wilayah di Indonesia</h5>
+                           </div>
+
+                           <div class="widget-content">
+
+                               <div class="mt-container mx-auto">
+                                   <div class="timeline-line">
+
+
+
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
                </div>
              </div>
             </div>
@@ -270,13 +289,22 @@
     const deathProgress = document.querySelector('#death-progress');
     const recover = document.querySelector('#recover');
     const recoverProgress = document.querySelector('#recover-progress');
+    const timeline = document.querySelector('.timeline-line');
+
+
     async function charts() {
 
       const getData = await fetch('https://api.kawalcorona.com/')
       .then(res => res.json())
       .then(res => res);
+
+      const region = await fetch('https://api.kawalcorona.com/indonesia/provinsi/')
+      .then(res => res.json())
+      .then(res => res);
+
       const indonesia = getData.filter(r => r.attributes.Country_Region === 'Indonesia');
       const lastUpdate = new Date(indonesia[0].attributes.Last_Update);
+      const {Confirmed,Active,Deaths,Recovered} =  indonesia[0].attributes;
       timezone.innerHTML = `Update :
        ${h[lastUpdate.getDay()]}
        ${lastUpdate.getDate()}
@@ -285,18 +313,71 @@
        Pukul
        ${lastUpdate.toLocaleTimeString("id-ID", {timeZone: "Asia/Jakarta"})} WIB
        `
-      chases.innerHTML = indonesia[0].attributes.Confirmed;
-      chasesProgress.style.width = +indonesia[0].attributes.Confirmed/10+'%'
+      chases.innerHTML = Confirmed;
+      chasesProgress.style.width = +Confirmed/100+'%'
 
-      active.innerHTML = indonesia[0].attributes.Active;
-      activeProgress.style.width = +indonesia[0].attributes.Active/10+'%'
+      active.innerHTML = Active;
+      activeProgress.style.width = +Active/100+'%'
 
-      death.innerHTML = indonesia[0].attributes.Deaths;
-      deathProgress.style.width = +indonesia[0].attributes.Deaths/10+'%'
+      death.innerHTML = Deaths;
+      deathProgress.style.width = +Deaths/100+'%'
 
-      recover.innerHTML = indonesia[0].attributes.Recovered;
-      recoverProgress.style.width = +indonesia[0].attributes.Recovered/10+'%'
+      recover.innerHTML = Recovered;
+      recoverProgress.style.width = +Recovered/100+'%'
 
+      const donutChart = {
+          chart: {
+              height: 350,
+              type: 'donut',
+              toolbar: {
+                show: false,
+              }
+          },
+          colors: ['#ffc107', '#e7515a', '#20c997'],
+          series: [Confirmed,Deaths,Recovered],
+          labels: ['Kasus', 'Meninggal', 'Sembuh'],
+          responsive: [{
+              breakpoint: 480,
+              options: {
+                  chart: {
+                      width: 300
+                  },
+                  legend: {
+                      position: 'bottom'
+                  }
+              }
+          }]
+      }
+
+      const donut = new ApexCharts(
+          document.querySelector("#donut-chart"),
+          donutChart
+      );
+
+      donut.render();
+
+      let line = ``;
+      region.forEach(r => {
+        line += ` <div class="item-timeline timeline-new">
+             <div class="t-content">
+                 <div class="t-uppercontent">
+                     <h5>${r.attributes.Provinsi}</h5>
+                 </div>
+                 <div class="tags">
+                     <span>Kasus </span>
+                     <div class="badge badge-warning">${r.attributes.Kasus_Posi}</div>
+                     <br>
+                      <span> Meninggal </span>
+                     <div class="badge badge-danger">${r.attributes.Kasus_Meni}</div>
+                     <br>
+                      <span> Sembuh </span>
+                     <div class="badge badge-success">${r.attributes.Kasus_Semb}</div>
+                 </div>
+             </div>
+         </div>`
+      })
+
+      timeline.innerHTML = line
     }
 
     charts();
