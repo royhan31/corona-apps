@@ -133,7 +133,6 @@
                             </div>
                         </div>
                     </div>
-
 										<div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
 											<div class="widget-four">
 													<div class="widget-heading">
@@ -183,7 +182,7 @@
 
 																					<div class="w-browser-stats">
 																							<div class="progress">
-																									<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 10%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+																									<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
 																							</div>
 																					</div>
 
@@ -196,6 +195,17 @@
 													</div>
 											</div>
 									</div>
+
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+												<div class="widget-four">
+														<div class="widget-heading">
+																<h5 class="">Persentase<span ></span> </h5>
+														</div>
+														<div class="widget-content">
+																<div style="display: none" id="donut-chart" class=""></div>
+														</div>
+												</div>
+										</div>
 
                 </div>
             </div>
@@ -229,6 +239,37 @@
 		const regionProgress = document.querySelector('.vistorsBrowser');
 
     async function regions() {
+			const donutChart = {
+					chart: {
+							height: 350,
+							type: 'donut',
+							toolbar: {
+								show: false,
+							}
+					},
+					colors: ['#ffc107', '#e7515a', '#20c997'],
+					series: [1,1,1],
+					labels: ['Kasus', 'Meninggal', 'Sembuh'],
+					responsive: [{
+							breakpoint: 480,
+							options: {
+									chart: {
+											width: 200
+									},
+									legend: {
+											position: 'bottom'
+									}
+							}
+					}]
+			}
+
+			const donut = new ApexCharts(
+					document.querySelector("#donut-chart"),
+					donutChart
+			);
+
+			donut.render();
+
 
       const getData = await fetch('https://api.kawalcorona.com/indonesia/provinsi/')
       .then(res => res.json())
@@ -256,10 +297,20 @@
 								f.classList.remove('timeline-new');
 							}
 						})
+						document.querySelector("#donut-chart").style.display = '',
+
+								console.log(donut.opts);
+						donut.updateSeries(donutChart.series = [	+getData[i].attributes.Kasus_Posi,
+								+getData[i].attributes.Kasus_Meni,
+								+getData[i].attributes.Kasus_Semb])
+
+						// console.log(donutChart.series);
 						const showProgress = displayProgress(getData[i])
 						regionProgress.innerHTML = showProgress
 				})
 			})
+
+
 			// const chases = getData.map(r => r.attributes.Kasus_Posi);
 			// const death = getData.map(r => r.attributes.Kasus_Meni);
 			// const recover = getData.map(r => r.attributes.Kasus_Semb);
@@ -298,19 +349,16 @@
 				</div>
 
 				<div class="browser-list">
-						<div class="w-icon">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-						</div>
 						<div class="w-browser-details">
 
 								<div class="w-browser-info">
-										<h6>Others</h6>
-										<p class="browser-count">15%</p>
+										<h6>Sembuh</h6>
+										<p class="browser-count">${data.attributes.Kasus_Semb}</p>
 								</div>
 
 								<div class="w-browser-stats">
 										<div class="progress">
-												<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+												<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: ${data.attributes.Kasus_Semb}%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
 										</div>
 								</div>
 
