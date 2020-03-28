@@ -19,6 +19,8 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="assets/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="assets/css/widgets/modules-widgets.css">
+    <link href="assets/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jvector/jquery-jvectormap-2.0.3.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -90,12 +92,20 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="region.html" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#wilayah" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                             <span>Wilayah</span>
                             </div>
                         </a>
+                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="wilayah" data-parent="#accordionExample">
+                           <li class="">
+                               <a href="region.html"> Provinsi </a>
+                           </li>
+                           <li>
+                               <a href="kab-brebes.html"> Kab Brebes </a>
+                           </li>
+                       </ul>
                     </li>
                     <li class="menu">
                       <a href="#" aria-expanded="false" class="dropdown-toggle">
@@ -233,7 +243,7 @@
                        </div>
                    </div>
 
-                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                        <div class="widget widget-activity-three">
 
                            <div class="widget-heading">
@@ -245,12 +255,32 @@
                                <div class="mt-container mx-auto">
                                    <div class="timeline-line">
 
-
-
                                    </div>
                                </div>
                            </div>
                        </div>
+                   </div>
+
+                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                       <div class="widget widget-activity-three">
+
+                           <div class="widget-heading">
+                               <h5 class="">Peta Corona di Indonesia</h5>
+                           </div>
+                            <div class="widget-content">
+                              <div id="map-indonesia" style="height: 400px; max-width: auto">
+
+                              </div>
+                            </div>
+
+                       </div>
+                   </div>
+
+                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing text-center">
+                     <p class="terms-conditions">© 2020 Plugin.
+                         Thanks To
+                         <a href="https://kawalcorona.com/">Kawalcorona</a> &
+                         <a href="http://api-corona-brebes.herokuapp.com/">api-corona-brebes</a>,
                    </div>
                </div>
              </div>
@@ -279,108 +309,13 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="assets/plugins/apex/apexcharts.min.js"></script>
 
+    <script src="assets/plugins/jvector/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="assets/plugins/notification/snackbar/snackbar.min.js"></script>
+    <script src="assets/plugins/jvector/asia/indonesia-id.js"></script>
+      <script src="assets/js/index.js"></script>
+
     <script>
-    const timazone = document.querySelector('#timezone');
-    const chases = document.querySelector('#chases');
-    const chasesProgress = document.querySelector('#chases-progress');
-    const active = document.querySelector('#active');
-    const activeProgress = document.querySelector('#active-progress');
-    const death = document.querySelector('#death');
-    const deathProgress = document.querySelector('#death-progress');
-    const recover = document.querySelector('#recover');
-    const recoverProgress = document.querySelector('#recover-progress');
-    const timeline = document.querySelector('.timeline-line');
-
-
-    async function charts() {
-
-      const getData = await fetch('https://api.kawalcorona.com/')
-      .then(res => res.json())
-      .then(res => res);
-
-      const region = await fetch('https://api.kawalcorona.com/indonesia/provinsi/')
-      .then(res => res.json())
-      .then(res => res);
-
-      const indonesia = getData.filter(r => r.attributes.Country_Region === 'Indonesia');
-      const lastUpdate = new Date(indonesia[0].attributes.Last_Update);
-      const {Confirmed,Active,Deaths,Recovered} =  indonesia[0].attributes;
-      timezone.innerHTML = `Update :
-       ${h[lastUpdate.getDay()]}
-       ${lastUpdate.getDate()}
-       ${m[lastUpdate.getMonth()]}
-       ${lastUpdate.getFullYear()}
-       Pukul
-       ${lastUpdate.toLocaleTimeString("id-ID", {timeZone: "Asia/Jakarta"})} WIB
-       `
-      chases.innerHTML = Confirmed;
-      chasesProgress.style.width = +Confirmed/100+'%'
-
-      active.innerHTML = Active;
-      activeProgress.style.width = +Active/100+'%'
-
-      death.innerHTML = Deaths;
-      deathProgress.style.width = +Deaths/100+'%'
-
-      recover.innerHTML = Recovered;
-      recoverProgress.style.width = +Recovered/100+'%'
-
-      const donutChart = {
-          chart: {
-              height: 350,
-              type: 'donut',
-              toolbar: {
-                show: false,
-              }
-          },
-          colors: ['#ffc107', '#e7515a', '#20c997'],
-          series: [Confirmed,Deaths,Recovered],
-          labels: ['Kasus', 'Meninggal', 'Sembuh'],
-          responsive: [{
-              breakpoint: 480,
-              options: {
-                  chart: {
-                      width: 300
-                  },
-                  legend: {
-                      position: 'bottom'
-                  }
-              }
-          }]
-      }
-
-      const donut = new ApexCharts(
-          document.querySelector("#donut-chart"),
-          donutChart
-      );
-
-      donut.render();
-
-      let line = ``;
-      region.forEach(r => {
-        line += ` <div class="item-timeline timeline-new">
-             <div class="t-content">
-                 <div class="t-uppercontent">
-                     <h5>${r.attributes.Provinsi}</h5>
-                 </div>
-                 <div class="tags">
-                     <span>Kasus </span>
-                     <div class="badge badge-warning">${r.attributes.Kasus_Posi}</div>
-                     <br>
-                      <span> Meninggal </span>
-                     <div class="badge badge-danger">${r.attributes.Kasus_Meni}</div>
-                     <br>
-                      <span> Sembuh </span>
-                     <div class="badge badge-success">${r.attributes.Kasus_Semb}</div>
-                 </div>
-             </div>
-         </div>`
-      })
-
-      timeline.innerHTML = line
-    }
-
-    charts();
+  
     </script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Pesebaran Corona </title>
+    <title>Persebaran Corona </title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
     <link href="assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="assets/js/loader.js"></script>
@@ -100,10 +100,10 @@
                           </div>
                         </a>
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="wilayah" data-parent="#accordionExample">
-                           <li class="active">
+                           <li>
                                <a href="region.html"> Provinsi </a>
                            </li>
-                           <li>
+                           <li class="active">
                                <a href="kab-brebes.html"> Kab Brebes </a>
                            </li>
                        </ul>
@@ -128,101 +128,6 @@
             <div class="layout-px-spacing">
                 <div class="row layout-top-spacing">
 
-                    <div class="analytics col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-activity-two">
-
-                            <div class="widget-heading">
-                                <h5 class="">Pilih Wialayah</h5>
-                            </div>
-
-                            <div class="widget-content">
-
-                                <div class="mt-container mx-auto">
-                                    <div class="timeline-line">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-										<div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-											<div class="widget-four">
-													<div class="widget-heading">
-															<h5 class="">Data per Wilayah </h5>
-													</div>
-													<div class="widget-content">
-															<div class="vistorsBrowser">
-																	<div class="browser-list">
-																			<div class="w-browser-details">
-																					<div class="w-browser-info">
-																							<h6>Kasus</h6>
-																							<p class="browser-count">0</p>
-																					</div>
-																					<div class="w-browser-stats">
-																							<div class="progress">
-																									<div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="1000" aria-valuemax="0"></div>
-																							</div>
-																					</div>
-																			</div>
-																	</div>
-
-																	<div class="browser-list">
-																			<div class="w-browser-details">
-
-																					<div class="w-browser-info">
-																							<h6>Meninggal</h6>
-																							<p class="browser-count">0</p>
-																					</div>
-
-																					<div class="w-browser-stats">
-																							<div class="progress">
-																									<div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-																							</div>
-																					</div>
-
-																			</div>
-
-																	</div>
-
-																	<div class="browser-list">
-																			<div class="w-browser-details">
-
-																					<div class="w-browser-info">
-																							<h6>Sembuh</h6>
-																							<p class="browser-count">0</p>
-																					</div>
-
-																					<div class="w-browser-stats">
-																							<div class="progress">
-																									<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
-																							</div>
-																					</div>
-
-																			</div>
-
-																	</div>
-
-															</div>
-
-													</div>
-											</div>
-									</div>
-
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-												<div class="widget-four">
-														<div class="widget-heading">
-																<h5 class="">Persentase<span ></span> </h5>
-														</div>
-														<div class="widget-content">
-																<div style="display: none" id="donut-chart" class=""></div>
-														</div>
-												</div>
-										</div>
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing text-center">
-                      <p class="terms-conditions">© 2020 Plugin.
-                          Thanks To
-                          <a href="https://kawalcorona.com/">Kawalcorona</a> &
-                          <a href="http://api-corona-brebes.herokuapp.com/">api-corona-brebes</a>,
-                    </div>
 
                 </div>
             </div>
@@ -249,145 +154,26 @@
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="assets/plugins/apex/apexcharts.min.js"></script>
-
     <script>
-    const timazone = document.querySelector('#timezone');
-		const timeline = document.querySelector('.timeline-line');
-		const regionProgress = document.querySelector('.vistorsBrowser');
+      async function brebes(){
+				let data = await getData();
+				if(data === {}){
+					data = await getData();
+				}
 
-    async function regions() {
-			const donutChart = {
-					chart: {
-							height: 350,
-							type: 'donut',
-							toolbar: {
-								show: false,
-							}
-					},
-					colors: ['#ffc107', '#e7515a', '#20c997'],
-					series: [1,1,1],
-					labels: ['Kasus', 'Meninggal', 'Sembuh'],
-					responsive: [{
-							breakpoint: 480,
-							options: {
-									chart: {
-											width: 300
-									},
-									legend: {
-											position: 'bottom'
-									}
-							}
-					}]
-			}
-
-			const donut = new ApexCharts(
-					document.querySelector("#donut-chart"),
-					donutChart
-			);
-
-			donut.render();
+				
 
 
-      const getData = await fetch('https://api.kawalcorona.com/indonesia/provinsi/')
-      .then(res => res.json())
-      .then(res => res);
+				function getData() {
+					return fetch('http://api-corona-brebes.herokuapp.com/').then(res => res.json())
+					.then(res => res)
+				}
 
-			let line = ``;
-			getData.map((r,i) =>{
-				line += `<div class="region item-timeline" data-index=${i}>
-						<div class="t-dot" data-original-title="" title="">
-						</div>
-						<div class="t-text">
-								<p>${r.attributes.Provinsi}</p>
-						</div>
-				</div>`
-			});
-			timeline.innerHTML = line
+				console.log(data);
+      }
 
-			const region = document.querySelectorAll('.region');
-			let progress = ``;
-			region.forEach((r, i) => {
-				r.addEventListener('click', function(){
-						this.classList.add('timeline-new');
-						[...region].find(f => {
-							if(f.dataset.index !== this.dataset.index){
-								f.classList.remove('timeline-new');
-							}
-						})
-						document.querySelector("#donut-chart").style.display = '',
-
-								console.log(donut.opts);
-						donut.updateSeries(donutChart.series = [	+getData[i].attributes.Kasus_Posi,
-								+getData[i].attributes.Kasus_Meni,
-								+getData[i].attributes.Kasus_Semb])
-
-						// console.log(donutChart.series);
-						const showProgress = displayProgress(getData[i])
-						regionProgress.innerHTML = showProgress
-				})
-			})
-
-
-			// const chases = getData.map(r => r.attributes.Kasus_Posi);
-			// const death = getData.map(r => r.attributes.Kasus_Meni);
-			// const recover = getData.map(r => r.attributes.Kasus_Semb);
-
-			function displayProgress(data){
-				return `<div class="browser-list">
-						<div class="w-browser-details">
-								<div class="w-browser-info">
-										<h6>Kasus</h6>
-										<p class="browser-count">${data.attributes.Kasus_Posi}</p>
-								</div>
-								<div class="w-browser-stats">
-										<div class="progress">
-												<div class="progress-bar bg-gradient-primary" role="progressbar" style="width: ${data.attributes.Kasus_Posi}%" aria-valuenow="0" aria-valuemin="1000" aria-valuemax="0"></div>
-										</div>
-								</div>
-						</div>
-				</div>
-
-				<div class="browser-list">
-						<div class="w-browser-details">
-
-								<div class="w-browser-info">
-										<h6>Meninggal</h6>
-										<p class="browser-count">${data.attributes.Kasus_Meni}</p>
-								</div>
-
-								<div class="w-browser-stats">
-										<div class="progress">
-												<div class="progress-bar bg-gradient-danger" role="progressbar" style="width: ${data.attributes.Kasus_Meni}%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1000"></div>
-										</div>
-								</div>
-
-						</div>
-
-				</div>
-
-				<div class="browser-list">
-						<div class="w-browser-details">
-
-								<div class="w-browser-info">
-										<h6>Sembuh</h6>
-										<p class="browser-count">${data.attributes.Kasus_Semb}</p>
-								</div>
-
-								<div class="w-browser-stats">
-										<div class="progress">
-												<div class="progress-bar bg-gradient-warning" role="progressbar" style="width: ${data.attributes.Kasus_Semb}%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
-										</div>
-								</div>
-
-						</div>
-
-				</div>`
-			}
-    }
-    regions();
+			brebes();
     </script>
-
-
 
 </body>
 </html>
