@@ -8,6 +8,7 @@ const deathProgress = document.querySelector('#death-progress');
 const recover = document.querySelector('#recover');
 const recoverProgress = document.querySelector('#recover-progress');
 const timeline = document.querySelector('.timeline-line');
+const status = document.querySelector('.tm-action');
 
 
 async function charts() {
@@ -123,7 +124,7 @@ async function charts() {
          const map = $('#map-indonesia').vectorMap('get', 'mapObject');
          const city = map.getRegionName(code);
 
-         const cityData = region.filter(r => r.attributes.Provinsi === city);
+         const cityData = region.filter(r => r.attributes.Provinsi.replace('Daerah Istimewa ','') === city );
          if(cityData.length > 0){
            el.html(el.html() + `<p id="popop"> Kasus ${cityData[0].attributes.Kasus_Posi}</p>`).css("fontSize","15px");
            el.html(el.html() + `<p id="popop"> Meninggal ${cityData[0].attributes.Kasus_Meni}</p>`).css("fontSize","15px");
@@ -153,13 +154,13 @@ async function charts() {
 
     function mapRegionFilter(m){
       region.filter(r => {
-        if(r.attributes.Provinsi === m.data.config.name){
+        if(r.attributes.Provinsi.replace('Daerah Istimewa ','') === m.data.config.name){
           if(r.attributes.Kasus_Posi < 50){
-              m.data.element.config.style.selected.fill = '#fcd116';
+              m.data.element.config.style.selected.fill = '#fffc00';
               m.data.element.config.style.selectedHover.fill = '#133060';
                 map.setSelectedRegions(m.path);
           }else if (r.attributes.Kasus_Posi > 50 && r.attributes.Kasus_Posi < 100) {
-              m.data.element.config.style.selected.fill = '#fffc00';
+              m.data.element.config.style.selected.fill = '#fcd116';
               m.data.element.config.style.selectedHover.fill = '#133060';
               map.setSelectedRegions(m.path);
           }else if (r.attributes.Kasus_Posi > 100 && r.attributes.Kasus_Posi < 500) {
@@ -174,6 +175,8 @@ async function charts() {
         }
       })
     }
+
+    status.style.display = ''
 
 } else {
       Snackbar.show({
