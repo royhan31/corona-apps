@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/widgets/modules-widgets.css">
     <link href="assets/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/jvector/jquery-jvectormap-2.0.3.css" rel="stylesheet" type="text/css" />
+
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -150,160 +151,32 @@
 
               <div class="page-header">
                    <div class="page-title">
-                       <h3>Data Persebaran Virus Corona Indonesia</h3>
-                        <h6 id="timezone"></h6>
+                       <h3>Data Persebaran Virus Corona Dunia</h3>
                    </div>
                </div>
                <div class="row sales">
-                <!-- <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                </div> -->
-                <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-card-four">
-                            <div class="widget-content">
-                                <div class="w-content">
-                                    <div class="w-info">
-                                        <h6 id="chases" class="value"></h6>
-                                        <p class="">Kasus</p>
-                                    </div>
-                                    <div class="">
-                                        <div class="w-icon">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                          </svg>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="progress">
-                                    <div id="chases-progress" class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+								 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+	 									<div class="widget">
 
-                    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                            <div class="widget widget-card-four">
-                                <div class="widget-content">
-                                    <div class="w-content">
-                                        <div class="w-info">
-                                            <h6 id="death" class="value"></h6>
-                                            <p class="">Meninggal</p>
-                                        </div>
-                                        <div class="">
-                                            <div class="w-icon">
-                                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-minus">
-                                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                                <circle cx="8.5" cy="7" r="4"></circle>
-                                                <line x1="23" y1="11" x2="17" y2="11"></line>
-                                              </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div id="death-progress" class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+	 											<div class="widget-heading">
+	 													<h5 class="">Peta Corona di Dunia</h5>
+	 											</div>
+	 											 <div class="widget-content">
+	 												 <div id="world-map" style="height: 400px; max-width: auto">
 
-                        <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                                <div class="widget widget-card-four">
-                                    <div class="widget-content">
-                                        <div class="w-content">
-                                            <div class="w-info">
-                                                <h6 id="recover" class="value"></h6>
-                                                <p class="">Sembuh</p>
-                                            </div>
-                                            <div class="">
-                                                <div class="w-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
-                                                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                                  <circle cx="8.5" cy="7" r="4"></circle>
-                                                  <line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="progress">
-                                            <div id="recover-progress" class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+	 												 </div>
+	 												 <div class="tm-action mt-2 mb-3 text-center" style="display: none">
+	 															<div><span class="dot-red-zone"></span> <span class="dot-text">Zona Merah</span></div>
+	 															<div><span class="dot-danger"></span> <span class="dot-text">Zona Bahaya</span></div>
+	 															<div><span class="dot-warning"></span> <span class="dot-text">Zona Waspada</span></div>
+	 															<div><span class="dot-semi-warning"> </span><span class="dot-text"> Zona Rawan</span></div>
+	 															<div><span class="dot-safe"></span> <span class="dot-text">Zona Aman</span></div>
+	 											 </div>
+	 											 </div>
 
-                    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                            <div class="widget widget-card-four">
-                                <div class="widget-content">
-                                    <div class="w-content">
-                                        <div class="w-info">
-                                            <h6 id="active" class="value"></h6>
-                                            <p class="">Kasus Aktif</p>
-                                        </div>
-                                        <div class="">
-                                            <div class="w-icon">
-                                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard">
-                                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                                              </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div id="active-progress" class="progress-bar bg-gradient-secondary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                       <div class="widget widget-chart-two">
-                           <div class="widget-heading">
-                               <h5 class="">Persentase<span ></span> </h5>
-                           </div>
-                           <div class="widget-content">
-                               <div id="donut-chart" class=""></div>
-                           </div>
-                       </div>
-                   </div>
-
-                   <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                       <div class="widget widget-activity-three">
-
-                           <div class="widget-heading">
-                               <h5 class="">Wilayah di Indonesia</h5>
-                           </div>
-
-                           <div class="widget-content">
-
-                               <div class="mt-container mx-auto">
-                                   <div class="timeline-line">
-
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                       <div class="widget">
-
-                           <div class="widget-heading">
-                               <h5 class="">Peta Corona di Indonesia</h5>
-                           </div>
-                            <div class="widget-content">
-                              <div id="map-indonesia" style="height: 400px; max-width: auto">
-
-                              </div>
-                              <div class="tm-action mt-2 mb-3 text-center" style="display: none">
-                                   <div><span class="dot-red-zone"></span> <span class="dot-text">Zona Merah</span></div>
-                                   <div><span class="dot-danger"></span> <span class="dot-text">Zona Bahaya</span></div>
-                                   <div><span class="dot-warning"></span> <span class="dot-text">Zona Waspada</span></div>
-                                   <div><span class="dot-semi-warning"> </span><span class="dot-text"> Zona Rawan</span></div>
-                                   <div><span class="dot-safe"></span> <span class="dot-text">Zona Aman</span></div>
-                            </div>
-                            </div>
-
-                       </div>
-                   </div>
+	 									</div>
+	 							</div>
 
                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing text-center">
                      <p class="terms-conditions">© 2020 Plugin.
@@ -343,8 +216,70 @@
 
     <script src="assets/plugins/jvector/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="assets/plugins/notification/snackbar/snackbar.min.js"></script>
-    <script src="assets/plugins/jvector/asia/indonesia-id.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/plugins/jvector/worldmap_script/jquery-jvectormap-world-mill-en.js"></script>
+
+    <script>
+			async function country(){
+				const countryData = await getData();
+
+				// console.log(countryData);
+
+				function getData(){
+					return fetch('https://pomber.github.io/covid19/timeseries.json').then(res => res.json()).then(res => res);
+				}
+
+				const mapCountry = [];
+				for (let key in countryData) {
+					if (countryData.hasOwnProperty(key)) {
+						let path = {
+							path: key,
+							data: countryData[key]
+						}
+						mapCountry.push(path)
+				 }
+				}
+
+
+				const map = new jvm.Map({
+			    map: 'world_mill_en',
+					container: $('#world-map'),
+			    backgroundColor: '#2196f3',
+			    borderColor: '#818181',
+			    borderOpacity: 0.25,
+			    borderWidth: 0.25,
+			    color: '#f4f3f0',
+			    regionStyle: {
+			        initial: {
+			            fill: '#fff',
+									stroke: '#2196f3',
+									"stroke-width": 0.01,
+			        },
+							hover: {
+				         "fill-opacity": 1,
+				         cursor: 'pointer',
+				         fill: '#5c1ac3'
+
+				          },
+			    },
+					onRegionTipShow: function (e, el, code) {
+	          const map = $('#world-map').vectorMap('get', 'mapObject');
+	          const city = map.getRegionName(code);
+						// console.log(city);
+					},
+			    enableZoom: true,
+			    hoverColor: '#060818',
+			    hoverOpacity: null,
+			    normalizeFunction: 'linear',
+			    scaleColors: ['#b6d6ff', '#005ace'],
+			    selectedColor: '#c9dfaf',
+			    selectedRegions: [],
+			    showTooltip: true,
+			});
+
+		}
+
+			country();
+    </script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 

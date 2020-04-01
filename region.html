@@ -330,13 +330,10 @@
 							}
 						})
 						document.querySelector("#donut-chart").style.display = '',
-
-								console.log(donut.opts);
 						donut.updateSeries(donutChart.series = [	+getData[i].attributes.Kasus_Posi,
 								+getData[i].attributes.Kasus_Meni,
 								+getData[i].attributes.Kasus_Semb])
 
-						// console.log(donutChart.series);
 						const showProgress = displayProgress(getData[i])
 						regionProgress.innerHTML = showProgress
 				})
