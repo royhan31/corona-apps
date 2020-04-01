@@ -19,6 +19,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="assets/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="assets/css/widgets/modules-widgets.css">
+    <link href="assets/css/components/tabs-accordian/custom-accordions.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -106,8 +107,11 @@
                            <li class="">
                                <a href="region.html"> Provinsi </a>
                            </li>
-                           <li class="active">
+                           <li class="">
                                <a href="kab-brebes.html"> Kab Brebes </a>
+                           </li>
+                           <li class="active">
+                               <a href="kab-tegal.html"> Kab Tegal </a>
                            </li>
                        </ul>
 										 </li>
@@ -162,23 +166,59 @@
                      <div class="widget widget-activity-three">
 
                          <div class="widget-heading">
-                             <h5 class="">Kacamtan di Tegal</h5>
+                             <h5 class="">Kacamatan di Tegal</h5>
                          </div>
                          <div class="widget-content">
                              <div class="mt-container mx-auto">
                                  <div class="timeline-line"></div>
                              </div>
                          </div>
-                         <div class="tm-action-btn mt-3">
-                           <p>hahahaha</p>
-                          </div>
+                         <div id="iconsAccordion" style="display: none" class="accordion-icons mt-2">
+                            <div class="card">
+                             <div class="card-header">
+                                 <section class="mb-0 mt-0">
+                                     <div role="menu" class="collapsed" data-toggle="collapse" data-target="#iconAccordionTwo" aria-expanded="false" aria-controls="iconAccordionTwo">
+                                         <div class="accordion-icon"> <img src="assets/img/hospital.png" alt=""></div>
+                                        <span class="text-white"> Info PDP di Rawat</span> <div class="icons">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                              <polyline points="6 9 12 15 18 9"></polyline>
+                                            </svg>
+                                         </div>
+                                     </div>
+                                 </section>
+                             </div>
+                             <div id="iconAccordionTwo" class="collapse" aria-labelledby="..." data-parent="#iconsAccordion">
+                                 <div class="card-body" id="rs"></div>
+                             </div>
+                         </div>
+                            <div class="card">
+                               <div class="card-header">
+                                   <section class="mb-0 mt-0">
+                                       <div role="menu" class="collapsed" data-toggle="collapse" data-target="#iconAccordionThree" aria-expanded="false" aria-controls="iconAccordionThree">
+                                           <div class="accordion-icon text-white"><img src="assets/img/info.png" alt=""></div>
+                                             <span class="text-white"> Keterangan</span> <div class="icons">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                               <polyline points="6 9 12 15 18 9"></polyline>
+                                             </svg>
+                                           </div>
+                                       </div>
+                                   </section>
+                               </div>
+                               <div id="iconAccordionThree" class="collapse" aria-labelledby="..." data-parent="#iconsAccordion">
+                               <div class="card-body">
+                                 <div class="card-body" id="ket"></div>
+                                </div>
+                               </div>
+                           </div>
+                        </div>
                      </div>
                  </div>
 
+
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing text-center">
                       <div class="widget-heading">
-                          <h5 class="">Sumber :
-														<a href="https://covid19.tegalkab.go.id/" target="_blank">corona19.tegalkab.go.id</a>
+                          <h5 class="text-white">Sumber :
+														<a href="https://covid19.tegalkab.go.id/" target="_blank">covid19.tegalkab.go.id</a>
 													</h5>
                       </div>
                     </div>
@@ -220,9 +260,13 @@
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="assets/plugins/apex/apexcharts.min.js"></script>
+    <script src="assets/js/components/ui-accordions.js"></script>
     <script>
 		const contentData = document.querySelector('#content-data');
-    const timeline = document.querySelector('.timeline-line')
+    const timeline = document.querySelector('.timeline-line');
+    const rs = document.querySelector('#rs');
+    const ket = document.querySelector('#ket');
+    const accordian = document.querySelector('#iconsAccordion');
       async function tegal(){
 				const result = await getData();
 
@@ -233,7 +277,8 @@
 				}
 				const showContentData = displayData(result.data.konfirmasi);
 				contentData.innerHTML = showContentData
-				console.log(result);
+
+        accordian.style.display = ''
 
         let line = ``;
         result.data.kecamatan.forEach(k => {
@@ -263,6 +308,20 @@
         });
 
         timeline.innerHTML = line
+
+        let rsData = ``;
+        result.data.rs.data.forEach(r => {
+          rsData += `<p class="text-white">${r}</p>`
+        });
+
+        rs.innerHTML = rsData
+
+        let ketData = ``;
+        result.data.rs.keterangan.forEach(r => {
+          ketData += `<p class="text-white">${r}</p>`
+        });
+
+        ket.innerHTML = ketData
 
 				function displayData(d){
 						return ` <div class="transactions-list">
