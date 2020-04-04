@@ -10,7 +10,6 @@ const recoverProgress = document.querySelector('#recover-progress');
 const timeline = document.querySelector('.timeline-line');
 const status = document.querySelector('.tm-action');
 
-
 async function charts() {
 
   const getData = await fetch('https://api.kawalcorona.com/')
@@ -20,6 +19,13 @@ async function charts() {
   const region = await fetch('https://api.kawalcorona.com/indonesia/provinsi/')
   .then(res => res.json())
   .then(res => res);
+
+  function numberFormat(number){
+    let reverse = number.toString().split('').reverse().join(''),
+    thousand = reverse.match(/\d{1,3}/g);
+    thousand = thousand.join('.').split('').reverse().join('');
+    return thousand;
+  }
 
   const indonesia = getData.filter(r => r.attributes.Country_Region === 'Indonesia');
   const lastUpdate = new Date(indonesia[0].attributes.Last_Update);
@@ -32,25 +38,39 @@ async function charts() {
    Pukul
    ${lastUpdate.toLocaleTimeString("id-ID", {timeZone: "Asia/Jakarta"})} WIB
    `
-  chases.innerHTML = Confirmed;
+  chases.innerHTML = numberFormat(Confirmed);
   chasesProgress.style.width = +Confirmed/100+'%'
 
-  active.innerHTML = Active;
+  active.innerHTML = numberFormat(Active);
   activeProgress.style.width = +Active/100+'%'
 
-  death.innerHTML = Deaths;
+  death.innerHTML = numberFormat(Deaths);
   deathProgress.style.width = +Deaths/100+'%'
 
-  recover.innerHTML = Recovered;
+  recover.innerHTML = numberFormat(Recovered);
   recoverProgress.style.width = +Recovered/100+'%'
 
   const donutChart = {
       chart: {
-          height: 350,
+          height: 405,
           type: 'donut',
           toolbar: {
             show: false,
           }
+      },
+      legend: {
+          position: 'bottom'
+      },
+      tooltip: {
+        y: {
+          formatter: function(value) {
+            let format = value;
+            if(format !== undefined){
+              format = numberFormat(value);
+            }
+            return format;
+          }
+        }
       },
       colors: ['#ffc107', '#e7515a', '#20c997'],
       series: [Confirmed,Deaths,Recovered],
@@ -59,7 +79,7 @@ async function charts() {
           breakpoint: 480,
           options: {
               chart: {
-                  width: 300
+                  width: 300,
               },
               legend: {
                   position: 'bottom'
@@ -86,13 +106,13 @@ async function charts() {
                </div>
                <div class="tags">
                    <span>Kasus </span>
-                   <div class="badge badge-warning">${r.attributes.Kasus_Posi}</div>
+                   <div class="badge badge-warning">${numberFormat(r.attributes.Kasus_Posi)}</div>
                    <br>
                     <span> Meninggal </span>
-                   <div class="badge badge-danger">${r.attributes.Kasus_Meni}</div>
+                   <div class="badge badge-danger">${numberFormat(r.attributes.Kasus_Meni)}</div>
                    <br>
                     <span> Sembuh </span>
-                   <div class="badge badge-success">${r.attributes.Kasus_Semb}</div>
+                   <div class="badge badge-success">${numberFormat(r.attributes.Kasus_Semb)}</div>
                </div>
            </div>
        </div>`
@@ -100,10 +120,10 @@ async function charts() {
 
     timeline.innerHTML = line
 
-    map = new jvm.Map(
+    const map = new jvm.Map(
       {
        map: 'indonesia_id',
-      container: $('#map-indonesia'),
+       container: $('#map-indonesia'),
        backgroundColor: '#2196f3',
        enableZoom: true,
        showTooltip: true,
@@ -126,16 +146,16 @@ async function charts() {
 
          const cityData = region.filter(r => r.attributes.Provinsi.replace('Daerah Istimewa ','') === city );
          if(cityData.length > 0){
-           el.html(el.html() + `<p id="popop"> Kasus ${cityData[0].attributes.Kasus_Posi}</p>`).css("fontSize","15px");
-           el.html(el.html() + `<p id="popop"> Meninggal ${cityData[0].attributes.Kasus_Meni}</p>`).css("fontSize","15px");
-           el.html(el.html() + `<p id="popop"> Sembuh ${cityData[0].attributes.Kasus_Semb}</p>`).css("fontSize","15px");
+           el.html(el.html() + `<p id="popop"> Kasus ${numberFormat(cityData[0].attributes.Kasus_Posi)}</p>`).css("fontSize","15px");
+           el.html(el.html() + `<p id="popop"> Meninggal ${numberFormat(cityData[0].attributes.Kasus_Meni)}</p>`).css("fontSize","15px");
+           el.html(el.html() + `<p id="popop"> Sembuh ${numberFormat(cityData[0].attributes.Kasus_Semb)}</p>`).css("fontSize","15px");
          }else{
             el.html(el.html() + `<p id="popop"> Tidak ada kasus</p>`).css("fontSize","15px");
          }
        }
       }
     );
-    // map.regionStyle = {initial: { fill: '#f8538d'}};
+
     const mapRegion = [];
     for (let key in map.regions) {
       if (map.regions.hasOwnProperty(key)) {
@@ -146,7 +166,6 @@ async function charts() {
         mapRegion.push(path)
      }
     }
-
 
     mapRegion.map(m=> {
       mapRegionFilter(m);

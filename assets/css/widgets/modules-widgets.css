@@ -2115,6 +2115,16 @@
   display: inline-block;
   }
 
+.dot-no-data {
+  height: 10px;
+  width: 10px;
+  max-width: 10px;
+  max-height: 10px;
+  background-color: #6c757d;
+  border-radius: 50%;
+  display: inline-block;
+  }
+
 .dot-text{
   color: white;
   margin-right: 10px;

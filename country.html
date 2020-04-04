@@ -84,8 +84,8 @@
                 </ul>
 
                 <ul class="list-unstyled menu-categories" id="accordionExample">
-                    <li class="menu active">
-                        <a href="index.html" aria-expanded="true" class="dropdown-toggle">
+                    <li class="menu">
+                        <a href="index.html" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
                                 <span>Beranda</span>
@@ -114,10 +114,13 @@
                            <li>
                                <a href="kab-brebes.html"> Kab Brebes </a>
                            </li>
+                           <li class="">
+                               <a href="kab-tegal.html"> Kab Tegal </a>
+                           </li>
                        </ul>
                    </li>
                    <li class="menu">
-                     <a href="statistik.html" aria-expanded="false" class="dropdown-toggle">
+                     <a href="statistic.html" aria-expanded="false" class="dropdown-toggle">
                           <div class="">
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
@@ -126,8 +129,8 @@
                           </div>
                       </a>
                    </li>
-                   <li class="menu">
-                     <a href="#" aria-expanded="false" class="dropdown-toggle">
+                   <li class="menu active">
+                     <a href="#" aria-expanded="true" class="dropdown-toggle">
                           <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
                               <circle cx="12" cy="12" r="10"></circle>
@@ -156,27 +159,77 @@
                </div>
                <div class="row sales">
 
-								 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-	 									<div class="widget">
+                <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12 col-12 layout-spacing">
+                   <div class="widget widget-table-one">
+                       <div class="widget-heading">
+                           <h5 class="">Data</h5>
+                       </div>
 
-	 											<div class="widget-heading">
-	 													<h5 class="">Peta Corona di Dunia</h5>
-	 											</div>
-	 											 <div class="widget-content">
-	 												 <div id="world-map" style="height: 400px; max-width: auto">
+                       <div class="widget-content" id="content-data">
 
-	 												 </div>
-	 												 <div class="tm-action mt-2 mb-3 text-center" style="display: none">
-	 															<div><span class="dot-red-zone"></span> <span class="dot-text">Zona Merah</span></div>
-	 															<div><span class="dot-danger"></span> <span class="dot-text">Zona Bahaya</span></div>
-	 															<div><span class="dot-warning"></span> <span class="dot-text">Zona Waspada</span></div>
-	 															<div><span class="dot-semi-warning"> </span><span class="dot-text"> Zona Rawan</span></div>
-	 															<div><span class="dot-safe"></span> <span class="dot-text">Zona Aman</span></div>
-	 											 </div>
-	 											 </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12 col-12 layout-spacing">
+                   <div class="widget widget-chart-two">
+                       <div class="widget-heading">
+                           <h5 class="">Persentase<span ></span> </h5>
+                       </div>
+                       <div class="widget-content">
+                           <div id="world-percentase" class=""></div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                 <div class="widget">
 
-	 									</div>
-	 							</div>
+                   <div class="widget-heading">
+                     <h5 class="">Peta Corona Dunia</h5>
+                   </div>
+                   <div class="widget-content">
+                     <div id="world-map" style="height: 400px; max-width: auto">
+
+                     </div>
+                     <div class="tm-action mt-2 mb-3 text-center" style="display">
+                       <div><span class="dot-red-zone"></span> <span class="dot-text">Zona Merah</span></div>
+                       <div><span class="dot-danger"></span> <span class="dot-text">Zona Bahaya</span></div>
+                       <div><span class="dot-warning"></span> <span class="dot-text">Zona Waspada</span></div>
+                       <div><span class="dot-semi-warning"> </span><span class="dot-text"> Zona Rawan</span></div>
+                       <div><span class="dot-no-data"></span> <span class="dot-text">Data tidak ditemukan</span></div>
+                     </div>
+                   </div>
+
+                 </div>
+               </div>
+                <div id="chartBar" class="col-xl-12 layout-spacing">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-6 col-sm-12 col-12">
+                                    <h4>15 Negara Teratas</h4>
+                                      <span class="badge badge-warning mt-2 ml-3" id="status" style="display: none"> Kasus </span>
+                                </div>
+                                <div class="col-xl-12 col-md-6 col-sm-12 col-12">
+                                  <div id="dropdown" class="dropdown custom-dropdown float-right" style="display: none">
+                                      <a class="dropdown-toggle" href="#" role="button" id="uniqueVisitors" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                      </a>
+
+                                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="uniqueVisitors">
+                                          <a class="dropdown-item" href="javascript:void(0);">Kasus</a>
+                                          <a class="dropdown-item" href="javascript:void(0);">Meninggal</a>
+                                          <a class="dropdown-item" href="javascript:void(0);">Sembuh</a>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                        </div>
+                      </div>
+                      <div class="widget-content widget-content-area">
+                           <div id="mixed-chart" class=""></div>
+                         </div>
+                    </div>
 
                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing text-center">
                      <p class="terms-conditions">© 2020 Plugin.
@@ -217,69 +270,9 @@
     <script src="assets/plugins/jvector/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="assets/plugins/notification/snackbar/snackbar.min.js"></script>
     <script src="assets/plugins/jvector/worldmap_script/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/js/custom-toast.js"></script>
+    <script src="assets/js/country.js"></script>
 
-    <script>
-			async function country(){
-				const countryData = await getData();
-
-				// console.log(countryData);
-
-				function getData(){
-					return fetch('https://pomber.github.io/covid19/timeseries.json').then(res => res.json()).then(res => res);
-				}
-
-				const mapCountry = [];
-				for (let key in countryData) {
-					if (countryData.hasOwnProperty(key)) {
-						let path = {
-							path: key,
-							data: countryData[key]
-						}
-						mapCountry.push(path)
-				 }
-				}
-
-
-				const map = new jvm.Map({
-			    map: 'world_mill_en',
-					container: $('#world-map'),
-			    backgroundColor: '#2196f3',
-			    borderColor: '#818181',
-			    borderOpacity: 0.25,
-			    borderWidth: 0.25,
-			    color: '#f4f3f0',
-			    regionStyle: {
-			        initial: {
-			            fill: '#fff',
-									stroke: '#2196f3',
-									"stroke-width": 0.01,
-			        },
-							hover: {
-				         "fill-opacity": 1,
-				         cursor: 'pointer',
-				         fill: '#5c1ac3'
-
-				          },
-			    },
-					onRegionTipShow: function (e, el, code) {
-	          const map = $('#world-map').vectorMap('get', 'mapObject');
-	          const city = map.getRegionName(code);
-						// console.log(city);
-					},
-			    enableZoom: true,
-			    hoverColor: '#060818',
-			    hoverOpacity: null,
-			    normalizeFunction: 'linear',
-			    scaleColors: ['#b6d6ff', '#005ace'],
-			    selectedColor: '#c9dfaf',
-			    selectedRegions: [],
-			    showTooltip: true,
-			});
-
-		}
-
-			country();
-    </script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
