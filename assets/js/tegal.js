@@ -5,19 +5,28 @@ const ket = document.querySelector('#ket');
 const accordian = document.querySelector('#iconsAccordion');
   async function tegal(){
     const result = await getData();
+    console.log(result);
 
     function getData() {
       return fetch('https://api-corona-brebes.herokuapp.com/tegal',{headers: {'Authorization' : 'RGlSdW1haEFqYVNheWFuZw=='}})
       .then(res => res.json())
       .then(res => res)
     }
-    const showContentData = displayData(result.data.konfirmasi);
+
+    function numberFormat(number){
+      let reverse = number.toString().split('').reverse().join(''),
+      thousand = reverse.match(/\d{1,3}/g);
+      thousand = thousand.join('.').split('').reverse().join('');
+      return thousand;
+    }
+
+    const showContentData = displayData(result.data);
     contentData.innerHTML = showContentData
 
     accordian.style.display = ''
 
     let line = ``;
-    result.data.kecamatan.forEach(k => {
+    result.kecamatan.forEach(k => {
       line += ` <div class="item-timeline timeline-new">
            <div class="t-content">
                <div class="t-uppercontent">
@@ -46,14 +55,14 @@ const accordian = document.querySelector('#iconsAccordion');
     timeline.innerHTML = line
 
     let rsData = ``;
-    result.data.rs.data.forEach(r => {
+    result.rs.data.forEach(r => {
       rsData += `<p class="text-white">${r}</p>`
     });
 
     rs.innerHTML = rsData
 
     let ketData = ``;
-    result.data.rs.keterangan.forEach(r => {
+    result.rs.keterangan.forEach(r => {
       ketData += `<p class="text-white">${r}</p>`
     });
 
@@ -78,77 +87,139 @@ const accordian = document.querySelector('#iconsAccordion');
                          <p class="meta-date">Pelaku Perjalanan</p>
                      </div>
                  </div>
-                 <div class="t-rate ${JSON.stringify(d.PP).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                   <p><span> <strong> ${d.PP} </strong></span> </p>
-                </div>
-             </div>
-         </div>
-         <div class="transactions-list">
-             <div class="t-item">
-                 <div class="t-company-name">
-                     <div class="t-icon">
-                         <div class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                         </div>
-                     </div>
-                     <div class="t-name">
-                         <h4 class="text-white">OTG</h4>
-                         <p class="meta-date">Orang Tanpa Gejala</p>
-                     </div>
-                 </div>
-                 <div class="t-rate ${JSON.stringify(d.OTG).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                    <p><span> <strong> ${d.OTG} </strong></span> </p>
+                 <div class="row">
+                   <div class="col-12">
+                     <div class="float-right t-rate rate-dec">
+                       <p><span> <strong> Total : ${numberFormat(d.PP.total)} </strong></span> </p>
+                    </div>
+                   </div>
+                   <div class="col-12">
+                     <div class="float-right t-rate rate-inc">
+                       <p><span> <strong> Selesai : ${numberFormat(d.PP.selesai)} </strong></span> </p>
+                    </div>
+                   </div>
+                   <div class="col-12">
+                     <div class="float-right t-rate rate-dec">
+                       <p><span> <strong> Pantauan : ${numberFormat(d.PP.pantauan)} </strong></span> </p>
+                    </div>
+                   </div>
                  </div>
              </div>
          </div>
          <div class="transactions-list">
-             <div class="t-item">
-                 <div class="t-company-name">
-                     <div class="t-icon">
-                         <div class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                         </div>
+              <div class="t-item">
+                  <div class="t-company-name">
+                      <div class="t-icon">
+                          <div class="icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle">
+                         <circle cx="12" cy="12" r="10"></circle>
+                         <line x1="12" y1="8" x2="12" y2="12"></line>
+                         <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                         </svg>
+                          </div>
+                      </div>
+                      <div class="t-name">
+                          <h4 class="text-white">OTG</h4>
+                          <p class="meta-date">Orang Tanpa Gejala</p>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Total : ${numberFormat(d.OTG.total)} </strong></span> </p>
                      </div>
-                     <div class="t-name">
-                         <h4 class="text-white">ODP</h4>
-                         <p class="meta-date">Orang Dalam Pengawasan</p>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-inc">
+                        <p><span> <strong> Selesai : ${numberFormat(d.OTG.selesai)} </strong></span> </p>
                      </div>
-                 </div>
-                 <div class="t-rate ${JSON.stringify(d.ODP).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                    <p><span> <strong> ${d.ODP} </strong></span> </p>
-                 </div>
-             </div>
-         </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Pantauan : ${numberFormat(d.OTG.pantauan)} </strong></span> </p>
+                     </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
          <div class="transactions-list">
-             <div class="t-item">
-                 <div class="t-company-name">
-                     <div class="t-icon">
-                         <div class="icon">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-frown">
-                             <circle cx="12" cy="12" r="10"></circle>
-                             <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
-                             <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                             <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              <div class="t-item">
+                  <div class="t-company-name">
+                      <div class="t-icon">
+                          <div class="icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                             <circle cx="12" cy="12" r="3"></circle>
                              </svg>
-                         </div>
+                          </div>
+                      </div>
+                      <div class="t-name">
+                          <h4 class="text-white">ODP</h4>
+                          <p class="meta-date">Orang Dalam Pantauan</p>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Total : ${numberFormat(d.ODP.total)} </strong></span> </p>
                      </div>
-                     <div class="t-name">
-                         <h4 class="text-white">PDP</h4>
-                         <p class="meta-date">Pasien Dalam Pengawasan</p>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-inc">
+                        <p><span> <strong> Selesai : ${numberFormat(d.ODP.selesai)} </strong></span> </p>
                      </div>
-                 </div>
-                 <div class="t-rate ${JSON.stringify(d.PDP).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                    <p><span> <strong> ${d.PDP} </strong></span> </p>
-                 </div>
-             </div>
-         </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Pantauan : ${numberFormat(d.ODP.pantauan)} </strong></span> </p>
+                     </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+         <div class="transactions-list">
+              <div class="t-item">
+                  <div class="t-company-name">
+                      <div class="t-icon">
+                          <div class="icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-frown">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+                              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                              </svg>
+                          </div>
+                      </div>
+                      <div class="t-name">
+                          <h4 class="text-white">PDP</h4>
+                          <p class="meta-date">Pasien Dalam Pemantauan</p>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Total : ${numberFormat(d.PDP.total)} </strong></span> </p>
+                     </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-inc">
+                        <p><span> <strong> Sembuh : ${numberFormat(d.PDP.sembuh)} </strong></span> </p>
+                     </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Dirawat : ${numberFormat(d.PDP.dirawat)} </strong></span> </p>
+                     </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Meninggal : ${numberFormat(d.PDP.meniggal)} </strong></span> </p>
+                     </div>
+                    </div>
+                  </div>
+
+              </div>
+          </div>
          <div class="transactions-list">
               <div class="t-item">
                   <div class="t-company-name">
@@ -166,76 +237,31 @@ const accordian = document.querySelector('#iconsAccordion');
                           <p class="meta-date"></p>
                       </div>
                   </div>
-                  <div class="t-rate ${JSON.stringify(d.CONFIRM).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                    <p><span> <strong> ${d.CONFIRM} </strong></span> </p>
-                 </div>
-              </div>
-          </div>
-          <div class="transactions-list">
-              <div class="t-item">
-                  <div class="t-company-name">
-                      <div class="t-icon">
-                          <div class="icon">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile">
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                          <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                          <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                          </svg>
-                          </div>
-                      </div>
-                      <div class="t-name">
-                          <h4 class="text-white">PDP Sembuh</h4>
-                          <p class="meta-date">Pasien Dalam Pengawasan (Sembuh)</p>
-                      </div>
-                  </div>
-                  <div class="t-rate ${JSON.stringify(d.PDP_SEMBUH).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                     <p><span> <strong> ${d.PDP_SEMBUH} </strong></span> </p>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Total : ${numberFormat(d.CONFIRM.total)} </strong></span> </p>
+                     </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-inc">
+                        <p><span> <strong> Sembuh : ${numberFormat(d.CONFIRM.sembuh)} </strong></span> </p>
+                     </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Dirawat : ${numberFormat(d.CONFIRM.dirawat)} </strong></span> </p>
+                     </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="float-right t-rate rate-dec">
+                        <p><span> <strong> Meninggal : ${numberFormat(d.CONFIRM.meniggal)} </strong></span> </p>
+                     </div>
+                    </div>
                   </div>
               </div>
           </div>
-          <div class="transactions-list">
-              <div class="t-item">
-                  <div class="t-company-name">
-                      <div class="t-icon">
-                          <div class="icon">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
-                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                          </svg>
-                          </div>
-                      </div>
-                      <div class="t-name">
-                          <h4 class="text-white">Konfirmasi Sembuh</h4>
-                          <p class="meta-date"></p>
-                      </div>
-                  </div>
-                  <div class="t-rate ${JSON.stringify(d.CONFIRM_SEMBUH).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                     <p><span> <strong> ${d.CONFIRM_SEMBUH} </strong></span> </p>
-                  </div>
-              </div>
-          </div>
-          <div class="transactions-list">
-              <div class="t-item">
-                  <div class="t-company-name">
-                      <div class="t-icon">
-                          <div class="icon">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-minus">
-                          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="8.5" cy="7" r="4"></circle>
-                          <line x1="23" y1="11" x2="17" y2="11"></line>
-                          </svg>
-                          </div>
-                      </div>
-                      <div class="t-name">
-                          <h4 class="text-white">PDP Meninggal</h4>
-                          <p class="meta-date"></p>
-                      </div>
-                  </div>
-                  <div class="t-rate ${JSON.stringify(d.PDP_MENINGGAL).replace('.','') > 1000 ? 'rate-dec' : 'rate-inc'}">
-                     <p><span> <strong> ${d.PDP_MENINGGAL} </strong></span> </p>
-                  </div>
-              </div>
-          </div>
+
           `
     }
   }
